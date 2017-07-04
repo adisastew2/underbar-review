@@ -39,11 +39,7 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    var index = array.length - n;
-    if ( index < 0 ) {
-      index = 0;
-    }
-    return n === undefined ? array[array.length - 1] : array.slice(index, array.length);
+    return n === undefined ? array[array.length - 1] : array.slice(Math.max(0, array.length - n));
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -164,6 +160,16 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    var noAcc = arguments.length === 2;
+    _.each(collection, (item)=>{
+      if (noAcc) {
+        accumulator = item;
+        noAcc = false;
+      } else {
+        accumulator = iterator(accumulator, item);
+      }
+    });
+    return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
