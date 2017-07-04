@@ -127,7 +127,7 @@
           iterations.push([letter, index]);
         });
         console.log(iterations);
-        expect(iterations).to.eql([['a', 0], ['b',1], ['c', 2]]);
+        expect(iterations).to.eql( [['a', 0], ['b', 1], ['c', 2]] );
       });
 
       it('should iterate over arrays and provide access to the original collection', function() {
@@ -154,7 +154,7 @@
           iterations.push(letter);
         });
 
-        expect(iterations).to.not.include(letters.someProperty);
+        expect(iterations).to.not.include('Do not iterate over me!');
       });
 
       it('should iterate over objects and provide access to each value', function() {
